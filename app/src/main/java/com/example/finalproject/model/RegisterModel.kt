@@ -2,7 +2,7 @@ package com.example.finalproject.model
 
 import com.example.finalproject.ultis.ValidationCheck
 
-data class User(
+data class RegisterModel(
     var name: String? = null,
     var email: String? = null,
     var password: String? = null,

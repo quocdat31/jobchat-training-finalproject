@@ -1,6 +1,5 @@
 package com.example.finalproject.firebase.authentication
 
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +26,10 @@ class FirebaseAuthImp @Inject constructor(
                             .setDisplayName(username)
                             .build()
                     )
+//                    val token = task.result?.user?.getIdToken(true)?.result?.token
+//                    Log.d("token", token.toString())
                     onResult(true, null)
+
                 }
             }
             .addOnFailureListener { exception ->
@@ -38,12 +40,14 @@ class FirebaseAuthImp @Inject constructor(
     override fun login(
         email: String,
         password: String,
-        username: String,
-        onResult: (Boolean) -> Unit
+        onResult: (Boolean, Exception?) -> Unit
     ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
-                onResult(task.isSuccessful && task.isComplete)
+                onResult(task.isSuccessful && task.isComplete, null)
+            }
+            .addOnFailureListener { e ->
+                onResult(false, e)
             }
     }
 

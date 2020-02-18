@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class InteractionModule {
 
     @Provides
-    fun auth(firebaseAuth: FirebaseAuth): FirebaseAuthInterface {
+    fun authentication(firebaseAuth: FirebaseAuth): FirebaseAuthInterface {
         return FirebaseAuthImp(firebaseAuth)
     }
 

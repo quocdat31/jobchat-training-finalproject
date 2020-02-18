@@ -1,7 +1,7 @@
 package com.example.finalproject.ui.register
 
-import com.example.finalproject.BasePresenter
-import com.example.finalproject.BaseView
+import com.example.finalproject.base.BasePresenter
+import com.example.finalproject.base.BaseView
 
 interface RegisterContract {
     interface View : BaseView {
@@ -10,6 +10,7 @@ interface RegisterContract {
         fun showPasswordError()
         fun showEmailError()
         fun showPasswordMatchingError()
+        fun showProgressBar()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -18,5 +19,9 @@ interface RegisterContract {
         fun onPasswordChange(password: String)
         fun onConfirmPasswordChange(confirmPassword: String)
         fun onSubmitRegister()
+    }
+
+    interface Navigator {
+        fun navigateMainScreen()
     }
 }

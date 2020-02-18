@@ -1,8 +1,7 @@
 package com.example.finalproject.ui.register
 
-import android.util.Log
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
-import com.example.finalproject.model.User
+import com.example.finalproject.model.RegisterModel
 import com.example.finalproject.ultis.ValidationCheck
 
 class RegisterPresenter constructor(
@@ -10,7 +9,7 @@ class RegisterPresenter constructor(
 ) : RegisterContract.Presenter {
 
     private lateinit var view: RegisterContract.View
-    private val user = User()
+    private val user = RegisterModel()
 
     override fun onUsernameChange(username: String) {
         user.name = username
@@ -40,6 +39,7 @@ class RegisterPresenter constructor(
 
     override fun onSubmitRegister() {
         if (user.isValid()) {
+            view.showProgressBar()
             val (name, email, password) = user
             firebaseAuthInterface.register(
                 email.toString(),
