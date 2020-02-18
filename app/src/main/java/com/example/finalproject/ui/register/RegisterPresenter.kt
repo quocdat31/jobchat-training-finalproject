@@ -1,9 +1,14 @@
 package com.example.finalproject.ui.register
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
 import com.example.finalproject.firebase.database.FirebaseDatabaseInterface
-import com.example.finalproject.model.RegisterModel
+import com.example.finalproject.model.RegisterRequest
 import com.example.finalproject.ultis.ValidationCheck
+
 
 class RegisterPresenter constructor(
     private val firebaseAuthInterface: FirebaseAuthInterface,
@@ -11,7 +16,10 @@ class RegisterPresenter constructor(
     ) : RegisterContract.Presenter {
 
     private lateinit var mView: RegisterContract.View
-    private val mUser = RegisterModel()
+    private val mUser = RegisterRequest()
+
+    val REQUEST_CODE = 1
+    val TITLE = "Select image"
 
     override fun onUsernameChange(username: String) {
         mUser.name = username
@@ -40,7 +48,7 @@ class RegisterPresenter constructor(
     }
 
     override fun onSubmitRegister() {
-        if (mUser.isValid()) {
+        if (ValidationCheck.isRegisterValid(mUser)) {
             mView.showProgressBar()
             val (name, email, password) = mUser
             firebaseAuthInterface.register(
@@ -50,11 +58,27 @@ class RegisterPresenter constructor(
             ) { onResult, exception ->
                 if (onResult) {
                     val id = firebaseAuthInterface.getUserId()
-                    firebaseDatabaseInterface.createUser(id, name.toString(), email.toString())
-                    mView.onRegisterSuccess()
+                    firebaseDatabaseInterface.createUser(
+                        id,
+                        name.toString(),
+                        email.toString()
+                    ) { onResult, exception ->
+                        if (onResult) mView.onRegisterSuccess() else mView.onRegisterError(
+                            exception
+                        )
+                    }
                 } else mView.onRegisterError(exception)
             }
         }
+    }
+
+    override fun accessGallery(context: Context) {
+
+        val intent = Intent().apply {
+            type="image/*"
+            action = Intent.ACTION_GET_CONTENT
+        }
+        startActivityForResult(context as Activity, Intent.createChooser(intent, TITLE),REQUEST_CODE, null)
     }
 
     override fun setView(view: RegisterContract.View) {
@@ -64,5 +88,7 @@ class RegisterPresenter constructor(
     override fun onStart() = Unit
 
     override fun onStop() = Unit
+
+
 
 }

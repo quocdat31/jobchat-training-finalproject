@@ -7,3 +7,5 @@ fun registerPresenter() = component().registerPresenter()
 fun loginPresenter() = component().loginPresenter()
 
 fun homePresenter() = component().homePresenter()
+
+fun contactPresenter() = component().contactPresenter()

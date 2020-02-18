@@ -3,7 +3,9 @@ package com.example.finalproject.di
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
 import com.example.finalproject.firebase.database.FirebaseDatabaseInterface
 import com.example.finalproject.ui.home.HomeContract
-import com.example.finalproject.ui.home.HomePresenter
+import com.example.finalproject.ui.home.MainPresenter
+import com.example.finalproject.ui.home.main_tab_fragment.contact.ContactContract
+import com.example.finalproject.ui.home.main_tab_fragment.contact.ContactPresenter
 import com.example.finalproject.ui.register.RegisterContract
 import com.example.finalproject.ui.register.RegisterPresenter
 import com.example.finalproject.ui.login.LogInContract
@@ -26,7 +28,11 @@ class PresenterModule {
 
     @Provides
     fun provideHomePresenter(firebaseAuthInterface: FirebaseAuthInterface): HomeContract.Presenter {
-        return HomePresenter(firebaseAuthInterface)
+        return MainPresenter(firebaseAuthInterface)
     }
 
+    @Provides
+    fun providerContactPresenter(firebaseAuthInterface: FirebaseAuthInterface, firebaseDatabaseInterface: FirebaseDatabaseInterface): ContactContract.Presenter {
+        return ContactPresenter(firebaseDatabaseInterface, firebaseAuthInterface)
+    }
 }

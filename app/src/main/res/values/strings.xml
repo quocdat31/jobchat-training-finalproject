@@ -31,6 +31,8 @@
     <string name="sampleSplash">Splash screen</string>
 
     <string name="onSuccess">Success</string>
+    <string name="sampleEmail">sample@gmail.com</string>
+    <string name="sampleName">Sample name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

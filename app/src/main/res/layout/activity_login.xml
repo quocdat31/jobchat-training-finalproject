@@ -10,7 +10,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
         android:layout_height="56dp"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/emailInputHInt"
@@ -26,8 +26,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
+        android:layout_height="@dimen/textInputLayoutHeight"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/passwordInputHint"
         app:helperText="@string/passwordInputHelper"

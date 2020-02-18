@@ -1,5 +1,7 @@
 package com.example.finalproject.ultis
 
+import com.example.finalproject.model.LoginRequest
+import com.example.finalproject.model.RegisterRequest
 import java.util.regex.Pattern
 
 object ValidationCheck {
@@ -15,5 +17,15 @@ object ValidationCheck {
     fun isConfirmPasswordMatch(password: String, confirmPassword: String) =
         isPasswordValid(password) && password == confirmPassword
 
-    fun isRegisterValid(){}
+    fun isRegisterValid(registerRequest: RegisterRequest): Boolean {
+        return isEmailValid(registerRequest.email.toString()) && isConfirmPasswordMatch(
+            registerRequest.password.toString(),
+            registerRequest.confirmPassword.toString()
+        )
+    }
+
+    fun isLoginValid(loginRequest: LoginRequest) =
+        isEmailValid(loginRequest.email.toString()) && isPasswordValid(
+            loginRequest.password.toString()
+        )
 }

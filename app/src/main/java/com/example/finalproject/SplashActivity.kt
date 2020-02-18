@@ -1,20 +1,26 @@
 package com.example.finalproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import com.example.finalproject.ui.home.MainActivity
 import com.example.finalproject.ui.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
-    private val DELAY_MILI: Long = 1000
+    companion object {
+        private const val DELAY_MILI: Long = 500
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent: Intent = if (FirebaseAuth.getInstance().currentUser == null) {
+            Intent(LoginActivity.getInstance(this))
+        } else Intent(MainActivity.getInstance(this))
 
         Handler().postDelayed(
             {

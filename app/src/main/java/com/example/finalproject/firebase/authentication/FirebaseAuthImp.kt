@@ -4,8 +4,8 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import io.reactivex.Observable
 import javax.inject.Inject
-import kotlin.Exception
 
 class FirebaseAuthImp @Inject constructor(
     val firebaseAuth: FirebaseAuth
@@ -15,8 +15,10 @@ class FirebaseAuthImp @Inject constructor(
         email: String,
         password: String,
         username: String,
-        onResult: (Boolean, Exception?) -> Unit
+        isSuccessful: (Boolean, Exception?) -> Unit
     ) {
+
+
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
                 if (task.isComplete && task.isSuccessful) {
@@ -28,26 +30,26 @@ class FirebaseAuthImp @Inject constructor(
                     )
 //                    val token = task.result?.user?.getIdToken(true)?.result?.token
 //                    Log.d("token", token.toString())
-                    onResult(true, null)
+                    isSuccessful(true, null)
 
                 }
             }
             .addOnFailureListener { exception ->
-                onResult(false, exception)
+                isSuccessful(false, exception)
             }
     }
 
     override fun login(
         email: String,
         password: String,
-        onResult: (Boolean, Exception?) -> Unit
+        isSuccessful: (Boolean, Exception?) -> Unit
     ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult> ->
-                onResult(task.isSuccessful && task.isComplete, null)
+                isSuccessful(task.isSuccessful && task.isComplete, null)
             }
             .addOnFailureListener { e ->
-                onResult(false, e)
+                isSuccessful(false, e)
             }
     }
 
@@ -55,8 +57,34 @@ class FirebaseAuthImp @Inject constructor(
 
     override fun getUsername(): String = firebaseAuth.currentUser?.displayName.toString()
 
-    override fun logout(onResult: () -> Unit) {
+    override fun getUserEmail(): String = firebaseAuth.currentUser?.email.toString()
+
+
+    override fun logout(isSuccessful: () -> Unit) {
         firebaseAuth.signOut()
-        onResult()
+        isSuccessful()
     }
+
+    override fun loginRx(
+        email: String,
+        password: String,
+        isSuccessful: (Boolean, Exception?) -> Unit
+    ): Observable<Void> {
+
+        return Observable.create { emitter ->
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isComplete && task.isSuccessful) {
+                        emitter.onComplete()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    emitter.onError(exception)
+                }
+        }
+
+
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.register
 
+import android.content.Context
 import com.example.finalproject.base.BasePresenter
 import com.example.finalproject.base.BaseView
 
@@ -11,6 +12,7 @@ interface RegisterContract {
         fun showEmailError()
         fun showPasswordMatchingError()
         fun showProgressBar()
+        fun onAvatarImageViewClick()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -19,6 +21,7 @@ interface RegisterContract {
         fun onPasswordChange(password: String)
         fun onConfirmPasswordChange(confirmPassword: String)
         fun onSubmitRegister()
+        fun accessGallery(context: Context)
     }
 
     interface Navigator {

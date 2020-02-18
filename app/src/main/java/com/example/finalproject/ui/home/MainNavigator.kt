@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.base.BaseNavigator
 import com.example.finalproject.ui.login.LoginActivity
 
-class HomeNavigator(activity: AppCompatActivity) : BaseNavigator(activity),
+class MainNavigator(activity: AppCompatActivity) : BaseNavigator(activity),
     HomeContract.Navigator {
     override fun navigateLoginScreen() {
         activity.startActivity(LoginActivity.getInstance(activity))

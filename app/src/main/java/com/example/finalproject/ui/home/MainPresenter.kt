@@ -2,11 +2,11 @@ package com.example.finalproject.ui.home
 
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
 
-class HomePresenter constructor(private val firebaseAuthInterface: FirebaseAuthInterface): HomeContract.Presenter {
+class MainPresenter constructor(private val firebaseAuthInterface: FirebaseAuthInterface): HomeContract.Presenter {
 
     private lateinit var view: HomeContract.View
 
-    override fun onLogOutButtonClick() {
+    override fun logOut() {
         firebaseAuthInterface.logout {
             view.onLogOut()
         }
