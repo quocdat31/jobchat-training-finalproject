@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.register.login
+package com.example.finalproject.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import com.example.finalproject.R
 import com.example.finalproject.loginPresenter
-import com.example.finalproject.ui.login.LoginNavigator
 import com.example.finalproject.ultis.onTextChanged
 import com.example.finalproject.ultis.toast
 import kotlinx.android.synthetic.main.activity_login.*
@@ -15,15 +14,14 @@ import kotlin.Exception
 
 class LoginActivity : AppCompatActivity(), LogInContract.View {
 
-
     companion object {
         fun getInstance(context: Context): Intent {
             return Intent(context, LoginActivity::class.java)
         }
     }
 
-    private val presenter by lazy { loginPresenter() }
-    private lateinit var navigator: LoginNavigator
+    private val mPresenter by lazy { loginPresenter() }
+    private lateinit var mNavigator: LoginNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,27 +55,27 @@ class LoginActivity : AppCompatActivity(), LogInContract.View {
 
     override fun onLoginSuccess() {
         loginProgressBar.visibility = View.GONE
-        navigator.navigateHomeScreen()
+        mNavigator.navigateHomeScreen()
     }
 
     override fun onSignUpButtonClick() {
-        navigator.navigateSignUpScreen()
+        mNavigator.navigateSignUpScreen()
     }
 
     private fun initView() {
-        presenter.setView(this)
-        navigator = LoginNavigator(this)
+        mPresenter.setView(this)
+        mNavigator = LoginNavigator(this)
     }
 
     private fun addEditTextListener() {
         signInEmailEditText.onTextChanged { email ->
-            presenter.onEmailChange(email)
+            mPresenter.onEmailChange(email)
         }
         signInPasswordEditText.onTextChanged { password ->
-            presenter.onPasswordChange(password)
+            mPresenter.onPasswordChange(password)
         }
         submitLoginButton.setOnClickListener {
-            presenter.onSubmitLogin()
+            mPresenter.onSubmitLogin()
         }
         signUpButton.setOnClickListener {
             onSignUpButtonClick()

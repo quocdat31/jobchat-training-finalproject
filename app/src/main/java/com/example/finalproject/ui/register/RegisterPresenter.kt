@@ -1,60 +1,64 @@
 package com.example.finalproject.ui.register
 
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
+import com.example.finalproject.firebase.database.FirebaseDatabaseInterface
 import com.example.finalproject.model.RegisterModel
 import com.example.finalproject.ultis.ValidationCheck
 
 class RegisterPresenter constructor(
-    private val firebaseAuthInterface: FirebaseAuthInterface
-) : RegisterContract.Presenter {
+    private val firebaseAuthInterface: FirebaseAuthInterface,
+    private val firebaseDatabaseInterface: FirebaseDatabaseInterface
+    ) : RegisterContract.Presenter {
 
-    private lateinit var view: RegisterContract.View
-    private val user = RegisterModel()
+    private lateinit var mView: RegisterContract.View
+    private val mUser = RegisterModel()
 
     override fun onUsernameChange(username: String) {
-        user.name = username
+        mUser.name = username
     }
 
     override fun onEmailChange(email: String) {
         if (!ValidationCheck.isEmailValid(email)) {
-            view.showEmailError()
+            mView.showEmailError()
         }
-        user.email = email
+        mUser.email = email
     }
 
     override fun onPasswordChange(password: String) {
         if (!ValidationCheck.isPasswordValid(password)) {
-            view.showPasswordError()
+            mView.showPasswordError()
         }
 
-        user.password = password
+        mUser.password = password
     }
 
     override fun onConfirmPasswordChange(confirmPassword: String) {
-        if (!ValidationCheck.isConfirmPasswordMatch(user.password.toString(), confirmPassword)) {
-            view.showPasswordMatchingError()
+        if (!ValidationCheck.isConfirmPasswordMatch(mUser.password.toString(), confirmPassword)) {
+            mView.showPasswordMatchingError()
         }
-        user.confirmPassword = confirmPassword
+        mUser.confirmPassword = confirmPassword
     }
 
     override fun onSubmitRegister() {
-        if (user.isValid()) {
-            view.showProgressBar()
-            val (name, email, password) = user
+        if (mUser.isValid()) {
+            mView.showProgressBar()
+            val (name, email, password) = mUser
             firebaseAuthInterface.register(
                 email.toString(),
                 password.toString(),
                 name.toString()
             ) { onResult, exception ->
-                if (onResult)
-                    view.onRegisterSuccess()
-                else view.onRegisterError(exception)
+                if (onResult) {
+                    val id = firebaseAuthInterface.getUserId()
+                    firebaseDatabaseInterface.createUser(id, name.toString(), email.toString())
+                    mView.onRegisterSuccess()
+                } else mView.onRegisterError(exception)
             }
         }
     }
 
     override fun setView(view: RegisterContract.View) {
-        this.view = view
+        this.mView = view
     }
 
     override fun onStart() = Unit

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.finalproject.R
 import com.example.finalproject.homePresenter
 import com.example.finalproject.ui.home.home_tab_fragment.ChatFragment
+import com.example.finalproject.ui.home.home_tab_fragment.contact.ContactFragment
 import com.example.finalproject.ui.home.home_tab_fragment.HomeFragment
 import com.example.finalproject.ui.home.home_tab_fragment.PersonalFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,7 +17,8 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity(), ChatFragment.OnFragmentInteractionListener,
-    HomeFragment.OnFragmentInteractionListener, PersonalFragment.OnFragmentInteractionListener, HomeContract.View {
+    HomeFragment.OnFragmentInteractionListener, PersonalFragment.OnFragmentInteractionListener,
+    ContactFragment.OnFragmentInteractionListener, HomeContract.View {
 
     companion object {
         fun getInstance(context: Context): Intent {
@@ -43,6 +45,8 @@ class HomeActivity : AppCompatActivity(), ChatFragment.OnFragmentInteractionList
                 R.id.nav_home -> selectedFragment = HomeFragment()
                 R.id.nav_chat -> selectedFragment = ChatFragment()
                 R.id.nav_personal -> selectedFragment = PersonalFragment()
+                R.id.nav_contact -> selectedFragment =
+                    ContactFragment()
             }
             if (selectedFragment != null) {
                 supportFragmentManager.beginTransaction().replace(

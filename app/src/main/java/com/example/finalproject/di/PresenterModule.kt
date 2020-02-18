@@ -1,12 +1,13 @@
 package com.example.finalproject.di
 
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
+import com.example.finalproject.firebase.database.FirebaseDatabaseInterface
 import com.example.finalproject.ui.home.HomeContract
 import com.example.finalproject.ui.home.HomePresenter
 import com.example.finalproject.ui.register.RegisterContract
 import com.example.finalproject.ui.register.RegisterPresenter
-import com.example.finalproject.ui.register.login.LogInContract
-import com.example.finalproject.ui.register.login.LoginPresenter
+import com.example.finalproject.ui.login.LogInContract
+import com.example.finalproject.ui.login.LoginPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -14,8 +15,8 @@ import dagger.Provides
 class PresenterModule {
 
     @Provides
-    fun providePresenter(firebaseAuthInterface: FirebaseAuthInterface): RegisterContract.Presenter {
-        return RegisterPresenter(firebaseAuthInterface)
+    fun providePresenter(firebaseAuthInterface: FirebaseAuthInterface, firebaseDatabaseInterface: FirebaseDatabaseInterface): RegisterContract.Presenter {
+        return RegisterPresenter(firebaseAuthInterface, firebaseDatabaseInterface)
     }
 
     @Provides
@@ -27,4 +28,5 @@ class PresenterModule {
     fun provideHomePresenter(firebaseAuthInterface: FirebaseAuthInterface): HomeContract.Presenter {
         return HomePresenter(firebaseAuthInterface)
     }
+
 }

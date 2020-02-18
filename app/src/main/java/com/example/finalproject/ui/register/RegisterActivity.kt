@@ -3,14 +3,12 @@ package com.example.finalproject.ui.register
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import com.example.finalproject.registerPresenter
 import com.example.finalproject.ultis.onTextChanged
 import com.example.finalproject.ultis.toast
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
@@ -21,8 +19,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         }
     }
 
-    private val presenter by lazy { registerPresenter() }
-    private lateinit var navigator: RegisterNavigator
+    private val mPresenter by lazy { registerPresenter() }
+    private lateinit var mNavigator: RegisterNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +32,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun onRegisterSuccess() {
-        Log.d("", FirebaseAuth.getInstance().currentUser?.uid.toString())
-        this.toast("Success")
-        navigator.navigateMainScreen()
+        this.toast(getString(R.string.onSuccess))
+        mNavigator.navigateMainScreen()
         setVisibilityProgressBar(View.GONE)
     }
 
@@ -64,29 +61,29 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     private fun initView() {
-        presenter.setView(this)
-        navigator = RegisterNavigator(this)
+        mPresenter.setView(this)
+        mNavigator = RegisterNavigator(this)
     }
 
     private fun addEditTextListener() {
         submitRegisterButton.setOnClickListener {
-            presenter.onSubmitRegister()
+            mPresenter.onSubmitRegister()
         }
 
         registerEmailEditText.onTextChanged { email ->
-            presenter.onEmailChange(email)
+            mPresenter.onEmailChange(email)
         }
 
         registerPasswordEditText.onTextChanged { password ->
-            presenter.onPasswordChange(password)
+            mPresenter.onPasswordChange(password)
         }
 
         registerConfirmPasswordEditText.onTextChanged { confirmPassword ->
-            presenter.onConfirmPasswordChange(confirmPassword)
+            mPresenter.onConfirmPasswordChange(confirmPassword)
         }
 
         registerUsernameEditText.onTextChanged { username ->
-            presenter.onUsernameChange(username)
+            mPresenter.onUsernameChange(username)
         }
     }
 

@@ -2,7 +2,7 @@ package com.example.finalproject.di
 
 import com.example.finalproject.ui.home.HomeContract
 import com.example.finalproject.ui.register.RegisterContract
-import com.example.finalproject.ui.register.login.LogInContract
+import com.example.finalproject.ui.login.LogInContract
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,4 +15,5 @@ interface AppComponent {
     fun loginPresenter(): LogInContract.Presenter
 
     fun homePresenter(): HomeContract.Presenter
+
 }

@@ -1,4 +1,4 @@
-package com.example.finalproject.ui.register.login
+package com.example.finalproject.ui.login
 
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
 import com.example.finalproject.model.LoginModel
@@ -7,37 +7,37 @@ import com.example.finalproject.ultis.ValidationCheck
 class LoginPresenter constructor(private val firebaseAuthInterface: FirebaseAuthInterface) :
     LogInContract.Presenter {
 
-    private lateinit var view: LogInContract.View
-    private var loginModel = LoginModel()
+    private lateinit var mView: LogInContract.View
+    private var mLoginModel = LoginModel()
 
     override fun onSubmitLogin() {
-        view.showProgressBar()
-        if (loginModel.isValid()) {
+        mView.showProgressBar()
+        if (mLoginModel.isValid()) {
             firebaseAuthInterface.login(
-                loginModel.email.toString(),
-                loginModel.password.toString()
+                mLoginModel.email.toString(),
+                mLoginModel.password.toString()
             ) { isSuccess, e ->
-                if (isSuccess) view.onLoginSuccess() else view.showLoginError(e)
+                if (isSuccess) mView.onLoginSuccess() else mView.showLoginError(e)
             }
         }
     }
 
     override fun onEmailChange(email: String) {
         if (!ValidationCheck.isEmailValid(email)) {
-            view.showEmailError()
+            mView.showEmailError()
         }
-        loginModel.email = email
+        mLoginModel.email = email
     }
 
     override fun onPasswordChange(password: String) {
         if (!ValidationCheck.isPasswordValid(password)) {
-            view.showPasswordError()
+            mView.showPasswordError()
         }
-        loginModel.password = password
+        mLoginModel.password = password
     }
 
     override fun setView(view: LogInContract.View) {
-        this.view = view
+        this.mView = view
     }
 
     override fun onStart() = Unit

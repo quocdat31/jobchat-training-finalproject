@@ -14,4 +14,6 @@ object ValidationCheck {
 
     fun isConfirmPasswordMatch(password: String, confirmPassword: String) =
         isPasswordValid(password) && password == confirmPassword
+
+    fun isRegisterValid(){}
 }

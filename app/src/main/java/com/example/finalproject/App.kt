@@ -8,8 +8,7 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
-        private set
-
+        //        private set
         val appComponent: AppComponent by lazy {
             DaggerAppComponent.builder().build()
         }

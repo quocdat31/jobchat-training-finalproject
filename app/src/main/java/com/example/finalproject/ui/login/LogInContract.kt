@@ -1,6 +1,5 @@
-package com.example.finalproject.ui.register.login
+package com.example.finalproject.ui.login
 
-import com.example.finalproject.base.BaseNavigator
 import com.example.finalproject.base.BasePresenter
 import com.example.finalproject.base.BaseView
 import kotlin.Exception
