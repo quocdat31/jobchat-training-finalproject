@@ -11,12 +11,23 @@
     <string name="confirmPasswordInputHelper">Must match to password</string>
     <string name="usernameInputHelper">Sample username input helper</string>
 
-    <string name="passwordInputError">Invalid password</string>
+    <string name="passwordInputError">At least 6 characters</string>
     <string name="confirmPasswordInputError">Not match to password</string>
     <string name="emailInputError">Invalid Email</string>
     <string name="usernameInputError">Sample username error</string>
 
     <string name="signIn">Sign in</string>
     <string name="signUp">Sign up</string>
+    <string name="logOut">Log out</string>
+
+    <string name="navigationHomeTab">Home</string>
+    <string name="navigationChatTab">Chat</string>
+    <string name="navigationPersonalTab">Personal</string>
+
+    <string name="requestSignUp">Have not account yet?</string>
+    <string name="sampleSplash">Splash screen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
