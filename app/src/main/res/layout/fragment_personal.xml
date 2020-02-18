@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.home_tab_fragment.PersonalFragment">
+    tools:context=".ui.home.main_tab_fragment.personal.PersonalFragment"
+>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/personalFragmentLogOutButton"

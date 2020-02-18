@@ -1,21 +1,21 @@
 package com.example.finalproject.ui.login
 
 import com.example.finalproject.firebase.authentication.FirebaseAuthInterface
-import com.example.finalproject.model.LoginModel
+import com.example.finalproject.model.LoginRequest
 import com.example.finalproject.ultis.ValidationCheck
 
 class LoginPresenter constructor(private val firebaseAuthInterface: FirebaseAuthInterface) :
     LogInContract.Presenter {
 
     private lateinit var mView: LogInContract.View
-    private var mLoginModel = LoginModel()
+    private var mLoginRequest = LoginRequest()
 
     override fun onSubmitLogin() {
         mView.showProgressBar()
-        if (mLoginModel.isValid()) {
+        if (ValidationCheck.isLoginValid(mLoginRequest)) {
             firebaseAuthInterface.login(
-                mLoginModel.email.toString(),
-                mLoginModel.password.toString()
+                mLoginRequest.email.toString(),
+                mLoginRequest.password.toString()
             ) { isSuccess, e ->
                 if (isSuccess) mView.onLoginSuccess() else mView.showLoginError(e)
             }
@@ -26,14 +26,14 @@ class LoginPresenter constructor(private val firebaseAuthInterface: FirebaseAuth
         if (!ValidationCheck.isEmailValid(email)) {
             mView.showEmailError()
         }
-        mLoginModel.email = email
+        mLoginRequest.email = email
     }
 
     override fun onPasswordChange(password: String) {
         if (!ValidationCheck.isPasswordValid(password)) {
             mView.showPasswordError()
         }
-        mLoginModel.password = password
+        mLoginRequest.password = password
     }
 
     override fun setView(view: LogInContract.View) {

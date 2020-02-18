@@ -10,7 +10,7 @@ interface HomeContract {
     }
 
     interface Presenter : BasePresenter<View> {
-        fun onLogOutButtonClick()
+        fun logOut()
     }
 
     interface Navigator {

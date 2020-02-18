@@ -1,10 +1,8 @@
 package com.example.finalproject.model
 
-data class User(
-    var id: String? = null,
+data class RegisterRequest(
     var name: String? = null,
     var email: String? = null,
-    var friendList: List<Friend>? = null
+    var password: String? = null,
+    var confirmPassword: String? = null
 )
-
-

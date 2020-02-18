@@ -8,14 +8,23 @@
     android:orientation="vertical"
     tools:context=".ui.register.RegisterActivity">
 
+    <ImageView
+        android:background="@color/colorLightGray"
+        android:id="@+id/registerAvatarImageView"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/baseMargin"
+        android:layout_width="@dimen/registerImagePreviewDimension"
+        android:layout_height="@dimen/registerImagePreviewDimension"/>
+
     <com.google.android.material.textfield.TextInputLayout
 
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
+        android:layout_height="@dimen/textInputLayoutHeight"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/emailInputHInt"
-        app:helperText="@string/emailInputHelper">
+        app:helperText="@string/emailInputHelper"
+        tools:targetApi="o">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerEmailEditText"
@@ -27,8 +36,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
+        android:layout_height="@dimen/textInputLayoutHeight"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/passwordInputHint"
         app:helperText="@string/passwordInputHelper"
@@ -44,8 +53,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
+        android:layout_height="@dimen/textInputLayoutHeight"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/confirmPasswordInputHint"
         app:helperText="@string/confirmPasswordInputHelper"
@@ -61,8 +70,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/textInputLayoutWidth"
+        android:layout_height="@dimen/textInputLayoutHeight"
         android:layout_marginVertical="@dimen/baseMargin"
         android:hint="@string/usernameInputHint"
         app:helperText="@string/usernameInputHelper">

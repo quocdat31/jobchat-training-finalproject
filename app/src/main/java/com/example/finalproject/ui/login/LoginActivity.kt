@@ -2,15 +2,19 @@ package com.example.finalproject.ui.login
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
 import com.example.finalproject.loginPresenter
 import com.example.finalproject.ultis.onTextChanged
 import com.example.finalproject.ultis.toast
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlin.Exception
 
 class LoginActivity : AppCompatActivity(), LogInContract.View {
 
