@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.home_tab_fragment.contact.ContactFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:hint="@string/searchFriendInputHint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        app:endIconMode="clear_text"
+        app:endIconDrawable="@drawable/ic_clear_black_24dp"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:layout_marginVertical="@dimen/baseMargin"
+        tools:ignore="PrivateResource">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchFriendEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:text="@string/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
